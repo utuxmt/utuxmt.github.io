@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Word2Vec,CS224," />
 
 
 
@@ -79,13 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog U">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;先附上影片連結以及投影片連結 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;表示字彙的方式或是將字彙向量化的方法最直觀的想法可能就是 one-hot 了，不過這樣的表示方法有很多缺點，像是向量維度會非常大，或是沒辦法表現字彙與字彙之間的關係。所以就有人提出了以字彙的前後文來表示的方法。核心的想法就是一個字彙的意思可以由經常出現在它前後的字彙(con">
+<meta name="keywords" content="Word2Vec,CS224">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS224 Lecture2 筆記 | Word Vector Representation">
+<meta property="og:url" content="http://yoursite.com/2018/06/08/cs224-lecture2/index.html">
 <meta property="og:site_name" content="Blog U">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;先附上影片連結以及投影片連結 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;表示字彙的方式或是將字彙向量化的方法最直觀的想法可能就是 one-hot 了，不過這樣的表示方法有很多缺點，像是向量維度會非常大，或是沒辦法表現字彙與字彙之間的關係。所以就有人提出了以字彙的前後文來表示的方法。核心的想法就是一個字彙的意思可以由經常出現在它前後的字彙(con">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/skipgram.jpg">
+<meta property="og:updated_time" content="2018-06-09T07:41:40.083Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog U">
+<meta name="twitter:title" content="CS224 Lecture2 筆記 | Word Vector Representation">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;先附上影片連結以及投影片連結 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;表示字彙的方式或是將字彙向量化的方法最直觀的想法可能就是 one-hot 了，不過這樣的表示方法有很多缺點，像是向量維度會非常大，或是沒辦法表現字彙與字彙之間的關係。所以就有人提出了以字彙的前後文來表示的方法。核心的想法就是一個字彙的意思可以由經常出現在它前後的字彙(con">
+<meta name="twitter:image" content="http://yoursite.com/images/skipgram.jpg">
 
 
 
@@ -115,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/08/cs224-lecture2/"/>
 
 
 
 
 
-  <title>Blog U</title>
+  <title>CS224 Lecture2 筆記 | Word Vector Representation | Blog U</title>
   
 
 
@@ -149,8 +156,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -223,9 +229,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -255,9 +261,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/cs224-lecture2/" itemprop="url">CS224 Lecture2 筆記 | Word Vector Representation</a></h1>
+          <h1 class="post-title" itemprop="name headline">CS224 Lecture2 筆記 | Word Vector Representation</h1>
         
 
         <div class="post-meta">
@@ -307,9 +311,7 @@
       
 
       
-        
-          
-            <p>&emsp;&emsp;&emsp;&emsp;先附上<a href="https://www.youtube.com/watch?v=ERibwqs9p38" target="_blank" rel="noopener">影片連結</a>以及<a href="http://web.stanford.edu/class/cs224n/lectures/lecture2.pdf" target="_blank" rel="noopener">投影片連結</a></p>
+        <p>&emsp;&emsp;&emsp;&emsp;先附上<a href="https://www.youtube.com/watch?v=ERibwqs9p38" target="_blank" rel="noopener">影片連結</a>以及<a href="http://web.stanford.edu/class/cs224n/lectures/lecture2.pdf" target="_blank" rel="noopener">投影片連結</a></p>
 <p>&emsp;&emsp;&emsp;&emsp;表示字彙的方式或是將字彙向量化的方法最直觀的想法可能就是 <a href="https://en.wikipedia.org/wiki/One-hot" target="_blank" rel="noopener"><em>one-hot</em></a> 了，不過這樣的表示方法有很多缺點，像是向量維度會非常大，或是沒辦法表現字彙與字彙之間的關係。所以就有人提出了以字彙的前後文來表示的方法。核心的想法就是<strong>一個字彙的意思可以由經常出現在它前後的字彙(context)來決定</strong>。這也就是 <a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="noopener">Word2Vec (Mikolov et al., 2013)</a> 核心的想法。</p>
 <h2 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h2><ul>
 <li>我們手上有大量的文本資料</li>
@@ -331,8 +333,6 @@
 <h3 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h3><p>&emsp;&emsp;&emsp;&emsp;原先將所有訓練資料都跑過才更新 $\theta$ 的方式稱為 <em>Batch Gradient Descent</em>，另外一個極端則是跑過一筆訓練資料就更新，這就是 <em>Stochastic Gradient Descent</em> 。而介於兩者之間，跑過 <em>m</em> 筆訓練資料($1 &lt; m &lt; size(data)$)再進行更新的，稱為 <em>Mini-Batch Gradient Descent</em>，code 如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    window = sample_window(corpus, batch_size) <span class="comment"># set batch_size=1 if Stochastic Gradient Descent</span></span><br><span class="line">    theta_grad = evaluate_gradient(J, window, theta)</span><br><span class="line">    theta = theta - alpha * theta_grad</span><br></pre></td></tr></table></figure></p>
 <h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>&emsp;&emsp;&emsp;&emsp;最後放上影片中有出現的一張圖，我覺得它很清楚地描繪了SkipGram模型的架構，不過並沒有在投影片內，這是我照樣劃的。整個模型最主要的目標就是要訓練出圖中的 <em>center word</em> 矩陣以及 <em>context word</em> 矩陣。<br><img src="/images/skipgram.jpg" alt="SkipGram"></p>
 
-          
-        
       
     </div>
     
@@ -347,279 +347,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/word2vec-training/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Utux">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog U">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/02/word2vec-training/" itemprop="url">Word2Vec 模型的訓練</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-02T23:47:23+08:00">
-                2018-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Word2Vec/" rel="tag"># Word2Vec</a>
           
-            
+            <a href="/tags/CS224/" rel="tag"># CS224</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>&emsp;&emsp;Word2Vec 是自然語言處理上很重要的工具，透過一個 NN 的模型將字彙轉變成向量，轉變成的向量可以拿來作許多有趣的應用。這篇文章將介紹這個將字彙轉變為向量的 NN 模型是如何訓練的，模型的結構、輸入的訓練資料以及輸出又是什麼樣子，會以 Skip-Gram 為例。</p>
-<h2 id="Skip-Gram"><a href="#Skip-Gram" class="headerlink" title="Skip-Gram"></a>Skip-Gram</h2><p>&emsp;&emsp;詞向量其實是訓練 Skip-Gram Model 產生的附屬品，在 <a href="https://www.coursera.org/specializations/deep-learning" target="_blank" rel="noopener">Coursera 上的 Deep Learning 課程</a>裡，Skip-Gram 的介紹是</p>
-<blockquote>
-<p>Given a sentence, randomly pick an word as context word, and randomly pick another word within some window to be the target word.</p>
-</blockquote>
-<p>（window 指的是在 context word 的上下文範圍。如當 window = 2 時，context word 的前後 2 個詞都是其上下文。）<br>Skip-Gram 模型白話一點的介紹可以說是給定一個字彙(context word)，預測一目標詞(target word)為其上下文的機率。例如當你的 context word 是 「數學」時，你會期望「老師」會有比「麥當勞」更高的機率為「數學」的上下文。而且當這樣的模型訓練好以後，<strong>只需要取模型所學習到的權重，這些權重就是我們想要的”Word Vector”。</strong></p>
-<h2 id="NN-Model"><a href="#NN-Model" class="headerlink" title="NN Model"></a>NN Model</h2><p>&emsp;&emsp;我們希望建立一個 NN 模型，當模型輸入一個字彙時，會輸出其他字彙為其上下文的機率。一個三層結構的 NN 模型可以達到這個目標。這個模型需要一連串的(context, target)的組合作為訓練資料。如當訓練的 corpus 僅有一句話且window size 為 1 時，訓練資料就如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">corpus = [<span class="string">"show me the money"</span>]</span><br><span class="line">train = [(<span class="string">"show"</span>, <span class="string">"me"</span>), (<span class="string">"me"</span>, <span class="string">"show"</span>), (<span class="string">"me"</span>, <span class="string">"the"</span>), (<span class="string">"the"</span>, <span class="string">"me"</span>), (<span class="string">"the"</span>, <span class="string">"money"</span>), (<span class="string">"money"</span>, <span class="string">"the"</span>)]</span><br></pre></td></tr></table></figure></p>
-<h3 id="Input-Layer"><a href="#Input-Layer" class="headerlink" title="Input Layer"></a>Input Layer</h3><p>&emsp;&emsp;假設我們共有 K 個字彙，因為無法直接將字彙以 string 的形式輸入給 NN ，所以必須將輸入的字彙經過某種轉換。如 <a href="">one-hot 編碼</a>，將字彙轉換為 K 維的向量後作為輸入資料。</p>
-<h3 id="Hidden-Layer"><a href="#Hidden-Layer" class="headerlink" title="Hidden Layer"></a>Hidden Layer</h3><p>&emsp;&emsp;在 Hidden Layer 的 neuron 數量將會決定我們用多少個特徵來表示一個字彙，如在 Hidden Layer 的 neuron 數量是 D ，代表未來每個字彙可以用為 D 維的向量表示。<br>&emsp;&emsp;Hidden Layer 會接收來自 Input Layer 的 K 維向量，所以可以想像 Hidden Layer 是個 K * D 的矩陣，並且這個矩陣在經過訓練後的權重就是字彙的詞向量。未來當我們以第 i 個字彙的 one-hot 向量乘以這個矩陣時，就相當於拿出這個矩陣的第 i 行向量，所以我們其實是在訓練出 Word Vector 的 lookup table。</p>
-<h3 id="Output-Layer"><a href="#Output-Layer" class="headerlink" title="Output Layer"></a>Output Layer</h3><p>&emsp;&emsp;Output Layer 是一個 <a href="https://zh.wikipedia.org/wiki/Softmax%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">softmax</a> 的分類器，目的是把每個 neuron 的輸出正規化，並且讓總和為 1 。所以模型最後輸出的是機率的分布。</p>
-<p>&emsp;&emsp;以上所講的是一個最簡單的模型，這個模型還存在一些缺點，如字彙量 K 太大時，計算 softmax 是很大的負擔，所以後來還有很多的改進方法，如 <a href="https://es.coursera.org/learn/nlp-sequence-models/lecture/Iwx0e/negative-sampling" target="_blank" rel="noopener">Negative Sampling</a> 等，未來再繼續補充。</p>
-<p>Ref: <a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">Word2Vec tutorial by Chris McCormick</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/docker.cmd_vs_entrypoint/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Utux">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog U">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/26/docker.cmd_vs_entrypoint/" itemprop="url">Dockerfile - CMD vs ENTRYPOINT</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T19:36:00+08:00">
-                2018-05-26
-              </time>
+              <a href="/2018/06/02/word2vec-training/" rel="next" title="Word2Vec 模型的訓練">
+                <i class="fa fa-chevron-left"></i> Word2Vec 模型的訓練
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>老實說，之前無論是寫 Dockerfile 或是 docker-compose.yml，我一直都只有用 CMD 指令。直到幾天前被問到 CMD 和 ENTRYPOINT 的差異時才知道 ENTRYPOINT 的存在…，只好事後趕快惡補一下，以下是我網上搜尋後稍微整理的筆記。關於 <a href="https://docs.docker.com/engine/reference/builder/#cmd" target="_blank" rel="noopener">CMD</a> 和 <a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank" rel="noopener">ENTRYPOINT</a> 的語法格式，在官方文件以及網路上有相當多的介紹了，這裡就不提及了。</p>
-<p>以啟動容器的指令 <code>docker run -i -t ubuntu bash</code> 為例，這個指令可以拆成三部分：</p>
-<ul>
-<li>容器啟動時使用的 image 是 <code>ubuntu</code></li>
-<li>啟動後執行預設的ENTRYPOINT (<code>/bin/sh -c</code>)</li>
-<li>啟動後執行的指令為 <code>bash</code></li>
-</ul>
-<p>表示容器透過 ENTRYPOINT 的預設指令 <code>/bin/sh -c</code> 來執行 <code>bash</code>指令，所以完整的指令其實是 <code>/bin/sh -c bash</code>。這也說明了為什麼我之前可以完全只用 CMD，因為其實背後已經有預設好的 ENTRYPOINT 了啊！<br>另外值得一提的是，在 ubuntu 的 Dockerfile 內，其實 CMD 也有預設的指令 <code>CMD [&quot;bash&quot;]</code>，故當你僅執行 <code>docker run -i -t ubuntu</code> 時，會有與前面的例子相同的效果。</p>
-<p>在<a href="https://stackoverflow.com/questions/21553353/what-is-the-difference-between-cmd-and-entrypoint-in-a-dockerfile" target="_blank" rel="noopener">StackOverflow</a>上有一個很好的例子。大家可以試試看在Dockerfile內將 ENTRYPOINT 設定為 <code>/bin/cat</code>，並且執行 <code>docker run ubuntu /etc/passwd</code>，這個例子應該更能幫助理解兩者用法的不同。</p>
-<p>最後附上有人整理出關於 Docker 的 RUN, CMD, ENTRYPOINT 三個指令的 <a href="https://www.ibm.com/developerworks/community/blogs/132cfa78-44b0-4376-85d0-d3096cd30d3f/entry/RUN_vs_CMD_vs_ENTRYPOINT_%E6%AF%8F%E5%A4%A95%E5%88%86%E9%92%9F%E7%8E%A9%E8%BD%AC_Docker_%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF_17?lang=en" target="_blank" rel="noopener">Best Practice</a></p>
-<ul>
-<li>使用 RUN 指令來建構容器、安裝套件。</li>
-<li>若容器的用途是用來運行某項服務，如MySQL，則優先使用 Exec 格式的 ENTRYPOINT 指令。CMD 指令可為 ENTRYPOINT 提供額外的預設參數，同時也可利用 docker run 來替換預設參數。</li>
-<li>若想為容器設置預設的啟動指令，可使用 CMD 指令。使用者可在 docker run 中替換此預設指令。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -629,138 +388,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Utux">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog U">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/25/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-25T21:27:03+08:00">
-                2018-05-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -768,6 +400,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -788,8 +424,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -840,6 +485,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intuition"><span class="nav-number">1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cost-Function"><span class="nav-number">2.</span> <span class="nav-text">Cost Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Descent"><span class="nav-number">3.</span> <span class="nav-text">Gradient Descent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Gradient-Descent"><span class="nav-number">3.1.</span> <span class="nav-text">Stochastic Gradient Descent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">4.</span> <span class="nav-text">Architecture</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -973,6 +634,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
